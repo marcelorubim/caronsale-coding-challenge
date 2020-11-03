@@ -26,7 +26,7 @@ export class AuctionMonitorApp {
             this.logger.log(`Average percent auction progress: ${averagePercentOfAuctionProgress}%`)
         }catch(err){
             console.error(err)
-            process.exit(1)
+            process.exit(-1)
         }
     }
 
