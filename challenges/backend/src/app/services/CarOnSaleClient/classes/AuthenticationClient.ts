@@ -7,6 +7,8 @@ import Axios from "axios";
 
 @injectable()
 export class AuthenticationClient implements IAuthenticationClient {
+    public constructor() {
+    }
     hashPasswordWithCycles(password: string, cycles: number): string {
         let hash = `${password}`
 

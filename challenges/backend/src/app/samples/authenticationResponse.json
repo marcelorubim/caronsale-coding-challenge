@@ -1,0 +1,9 @@
+{
+    "token": "FaKeToK3n",
+    "authenticated": true,
+    "userId": "salesman@random.com",
+    "internalUserId": 1,
+    "internalUserUUID": "ce5e3d7f-3a3d-4fde-96bc-986d5f483df8",
+    "type": 1,
+    "privileges": "{PUBLIC_USER}~{SALESMAN_USER}"
+  }

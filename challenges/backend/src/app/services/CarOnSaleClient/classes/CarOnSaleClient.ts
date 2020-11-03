@@ -17,7 +17,6 @@ export class CarOnSaleClient implements ICarOnSaleClient {
             meta: "",
             password: "123test"
         })
-        console.log(authenticationResult)
         return Axios.get<IAuctionsResponse>("https://caronsale-backend-service-dev.herokuapp.com/api/v2/auction/buyer/?filter=salesman", {
             headers: {
                 authtoken: authenticationResult.token,
