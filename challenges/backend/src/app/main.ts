@@ -7,6 +7,8 @@ import { CarOnSaleClient } from "./services/CarOnSaleClient/classes/CarOnSaleCli
 import { ICarOnSaleClient } from "./services/CarOnSaleClient/interface/ICarOnSaleClient";
 import { IAuthenticationClient } from "./services/CarOnSaleClient/interface/IAuthenticationClient";
 import { AuthenticationClient } from "./services/CarOnSaleClient/classes/AuthenticationClient";
+import IConfigurationProvider from "./util/interface/IConfigurationProvider";
+import ConfigurationProvider from "./util/classes/ConfigurationProvider";
 
 /*
  * Create the DI container.
@@ -21,6 +23,7 @@ const container = new Container({
 container.bind<ILogger>(DependencyIdentifier.LOGGER).to(Logger);
 container.bind<ICarOnSaleClient>(DependencyIdentifier.CAR_ON_SALE_CLIENT).to(CarOnSaleClient);
 container.bind<IAuthenticationClient>(DependencyIdentifier.AUTHCLIENT).to(AuthenticationClient);
+container.bind<IConfigurationProvider>(DependencyIdentifier.CONFIGPROVIDER).to(ConfigurationProvider);
 
 
 /*

@@ -7,6 +7,8 @@ import { AuthenticationClient } from "./AuthenticationClient";
 import { CarOnSaleClient } from "./CarOnSaleClient";
 import { expect } from "chai";
 import nock from "nock"
+import IConfigurationProvider from "../../../util/interface/IConfigurationProvider";
+import ConfigurationProvider from "../../../util/classes/ConfigurationProvider";
 
 describe('CarOnSaleClient service', () => {
     let carOnSaleClient: ICarOnSaleClient
@@ -17,6 +19,7 @@ describe('CarOnSaleClient service', () => {
             defaultScope: "Singleton",
         });
         container.bind<IAuthenticationClient>(DependencyIdentifier.AUTHCLIENT).to(AuthenticationClient);
+        container.bind<IConfigurationProvider>(DependencyIdentifier.CONFIGPROVIDER).to(ConfigurationProvider);
         carOnSaleClient = container.resolve(CarOnSaleClient);
 
         // Configure the http mocks

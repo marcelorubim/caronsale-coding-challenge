@@ -1,13 +1,15 @@
-import { injectable } from "inversify";
+import { inject, injectable } from "inversify";
 import IAuthenticationRequest from "../../../types/IAuthenticationRequest";
 import IAuthenticationResult from "../../../types/IAuthenticationResult";
 import { IAuthenticationClient } from "../interface/IAuthenticationClient";
 import crypto from "crypto";
 import Axios from "axios";
+import { DependencyIdentifier } from "../../../DependencyIdentifiers";
+import IConfigurationProvider from "../../../util/interface/IConfigurationProvider";
 
 @injectable()
 export class AuthenticationClient implements IAuthenticationClient {
-    public constructor() {
+    public constructor(@inject(DependencyIdentifier.CONFIGPROVIDER) private configuration: IConfigurationProvider) {
     }
     hashPasswordWithCycles(password: string, cycles: number): string {
         let hash = `${password}`
@@ -19,9 +21,9 @@ export class AuthenticationClient implements IAuthenticationClient {
         return hash
     }
     authenticate(userMailId: string, request: IAuthenticationRequest): Promise<IAuthenticationResult> {
-        return Axios.put<IAuthenticationResult>(`https://caronsale-backend-service-dev.herokuapp.com/api/v1/authentication/${userMailId}`, {
+        return Axios.put<IAuthenticationResult>(`${this.configuration.remoteHost}/api/v1/authentication/${userMailId}`, {
             ...request,
-            password: this.hashPasswordWithCycles(request.password, 5),
+            password: this.hashPasswordWithCycles(request.password, this.configuration.passwordCycles),
         }).then(response => response.data)
     }
 }

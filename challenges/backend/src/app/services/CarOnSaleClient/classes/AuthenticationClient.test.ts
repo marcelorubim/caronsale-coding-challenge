@@ -7,15 +7,19 @@ import { AuthenticationClient } from "./AuthenticationClient";
 import { CarOnSaleClient } from "./CarOnSaleClient";
 import { expect } from "chai";
 import nock from "nock"
+import IConfigurationProvider from "../../../util/interface/IConfigurationProvider";
+import ConfigurationProvider from "../../../util/classes/ConfigurationProvider";
 
 describe('AuthenticationClient service', () => {
     let authenticationClient: IAuthenticationClient
 
     before(() => {
-        // Configure InversifyJS container (AuthenticationClient currently does not inject any dependency, but its better to let the test prepared)
+        // Configure InversifyJS container
         const container = new Container({
             defaultScope: "Singleton",
         });
+        container.bind<IConfigurationProvider>(DependencyIdentifier.CONFIGPROVIDER).to(ConfigurationProvider);
+
         authenticationClient = container.resolve(AuthenticationClient);
     })
 
