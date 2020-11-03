@@ -25,8 +25,8 @@ describe('CarOnSaleClient service', () => {
         // Configure the http mocks
         const apiMock = nock("https://caronsale-backend-service-dev.herokuapp.com/")
 
-        apiMock.put(/\/api\/v1\/authentication\/.*/).reply(200, require("../../../samples/authenticationResponse.json"))
-        apiMock.get("/api/v2/auction/buyer/").query(true).reply(200, require("../../../samples/runningAuctionsResponse.json"))
+        apiMock.put(/\/api\/v1\/authentication\/.*/).reply(200, require("../../../samples/authenticationResponse.json"));
+        apiMock.get("/api/v2/auction/buyer/").query(true).reply(200, require("../../../samples/runningAuctionsResponse.json"));
     })
 
     it("should retrieve the running auctions", async () => {

@@ -12,18 +12,18 @@ export class AuthenticationClient implements IAuthenticationClient {
     public constructor(@inject(DependencyIdentifier.CONFIGPROVIDER) private configuration: IConfigurationProvider) {
     }
     hashPasswordWithCycles(password: string, cycles: number): string {
-        let hash = `${password}`
+        let hash = `${password}`;
 
-        for(let i = 0; i < cycles; i++){
-            hash = crypto.createHash("sha512").update(hash).digest("hex")
+        for (let i = 0; i < cycles; i++) {
+            hash = crypto.createHash("sha512").update(hash).digest("hex");
         }
-    
-        return hash
+
+        return hash;
     }
     authenticate(userMailId: string, request: IAuthenticationRequest): Promise<IAuthenticationResult> {
         return Axios.put<IAuthenticationResult>(`${this.configuration.remoteHost}/api/v1/authentication/${userMailId}`, {
             ...request,
             password: this.hashPasswordWithCycles(request.password, this.configuration.passwordCycles),
-        }).then(response => response.data)
+        }).then(response => response.data);
     }
 }

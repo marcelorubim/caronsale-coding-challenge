@@ -19,7 +19,7 @@ export class CarOnSaleClient implements ICarOnSaleClient {
         const authenticationResult = await this.authenticationClient.authenticate(this.configuration.userMailId, {
             meta: "",
             password: this.configuration.userPassword
-        })
+        });
         return Axios.get<IAuctionsResponse>(`${this.configuration.remoteHost}/api/v2/auction/buyer/?filter=${this.configuration.runningAuctionsFilter}`, {
             headers: {
                 authtoken: authenticationResult.token,
